@@ -24,12 +24,14 @@ public class Wall extends GameObject {
 
     @Override
     public void tick() {
+
         if(getBounds().intersects(gameHandler.getPlayer().getBounds())){
             Player player = gameHandler.getPlayer();
 
             player.setVelX(0);
             player.setVelY(0);
         }
+
     }
 
     @Override
