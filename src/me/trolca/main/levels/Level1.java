@@ -57,7 +57,7 @@ public class Level1 extends Level {
 
         gameHandler.clearEnemys();
         gameHandler.addGameObject(new BasicEnemy(50, 50, ID.BASIC_ENEMY, gameHandler));
-        gameHandler.addGameObject(new Wall(200, 100, 100, 10,  Color.PINK, ID.WALL, gameHandler));
+        gameHandler.addGameObject(new Wall(350, 250, 100, 10,  Color.PINK, ID.WALL, gameHandler));
     }
 
     @Override

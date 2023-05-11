@@ -19,7 +19,7 @@ public class FollowEnemy extends Enemy {
     public FollowEnemy(int x, int y, ID id, GameHandler gameHandler) {
         super(x, y, id);
         this.gameHandler = gameHandler;
-        speed = (float) 2.2;
+        speed = (float) 5;
     }
 
     @Override

@@ -39,7 +39,7 @@ public class MainGame extends Canvas implements Runnable{
     public MainGame(){
         particleHandler = new ParticleHandler();
         gameHandler = new GameHandler(particleHandler);
-        gameHandler.addGameObject(new Player(100, 100, ID.PLAYER, gameHandler));
+        gameHandler.addGameObject(new Player(250, 250, ID.PLAYER, gameHandler));
         hud = new HUD(gameHandler);
         animationHandler = new AnimationHandler();
 
