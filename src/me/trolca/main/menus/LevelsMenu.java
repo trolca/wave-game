@@ -29,8 +29,6 @@ public class LevelsMenu extends Menu implements MouseWheelListener {
         howMuchSpacing = levelHandler.getLevels().get(0).getWidth()+30;
         maxX = (int) ((float) (levelHandler.getLevels().size()-2.8)*howMuchSpacing);
         int levelNum = LevelHandler.getCurrLevel() == null ? 1 : LevelHandler.getCurrLevel().getLevelNum()-1;
-        System.out.println(startX);
-        System.out.println(levelHandler.getLevels().size());
         startX += howMuchSpacing*(levelNum)*-1;
         if(levelNum >= levelHandler.getLevels().size()-2) startX = (maxX+13)*(-1);
     }

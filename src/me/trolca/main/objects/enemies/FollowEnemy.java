@@ -10,14 +10,13 @@ import java.awt.*;
 
 public class FollowEnemy extends Enemy {
 
-    private GameHandler gameHandler;
 
     private float xFloat=0;
     private float yFloat=0;
     private final float speed;
 
     public FollowEnemy(int x, int y, ID id, GameHandler gameHandler) {
-        super(x, y, id);
+        super(x, y, id, gameHandler);
         this.gameHandler = gameHandler;
         speed = (float) 5;
     }
@@ -40,6 +39,9 @@ public class FollowEnemy extends Enemy {
 
         xFloat += speed*xPercentage;
         yFloat += speed*yPercentage;
+
+        checkWallColisions();
+
 
         if(xFloat >= 1 || xFloat <= -1){
             int addX = (int) Math.floor(xFloat);

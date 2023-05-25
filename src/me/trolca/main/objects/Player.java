@@ -45,97 +45,9 @@ public class Player extends GameObject {
         g.setColor(Color.WHITE);
         g.fillRect(x, y, this.width, this.height);
 
-//       aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdw vrft3q1hq1g f\ q ~!lz
+
     }
 
-    public int getDistanceFromObject(Face face, int startX, int startY,int width, int height, GameObject gameObject){
-        int addDir;
-
-        if(face == Face.NORTH || face == Face.SOUTH){
-            addDir = face == Face.NORTH ? -1 : 1;
-        }else{
-            addDir = face == Face.EAST ? 1 : -1;
-        }
-
-        boolean isDone=false;
-        int howFar=0;
-        int traceX= startX;
-        int traceY= startY;
-        ArrayList<Rectangle> sussy = new ArrayList<>();
-
-        while(!isDone){
-
-            if(face == Face.NORTH || face == Face.SOUTH){ //y
-                traceY += addDir;
-            }else{ //x
-                traceX += addDir;
-            }
-
-            howFar++;
-            Rectangle rectangle = new Rectangle(traceX, traceY, width, height);
-            sussy.add(rectangle);
-            if(rectangle.intersects(gameObject.getBounds())){
-                isDone = true;
-            }
-
-            if(traceX < 0 || traceY < 0 || traceX > MainGame.WIDTH || traceY > MainGame.HEIGHT){
-                isDone = true;
-                howFar = -1;
-            }
-
-
-        }
-
-
-        return howFar;
-    }
-
-    public int getDistanceFromObjectButGraphics(Face face, int startX, int startY, int width, int height, GameObject gameObject, Graphics g){
-        int addDir;
-
-        if(face == Face.NORTH || face == Face.SOUTH){
-            addDir = face == Face.NORTH ? -1 : 1;
-        }else{
-            addDir = face == Face.EAST ? 1 : -1;
-        }
-
-        boolean isDone=false;
-        int howFar=0;
-        int traceX= startX;
-        int traceY= startY;
-        ArrayList<Rectangle> sussy = new ArrayList<>();
-
-        while(!isDone){
-
-            if(face == Face.NORTH || face == Face.SOUTH){ //y
-                traceY += addDir;
-            }else{ //x
-                traceX += addDir;
-            }
-
-            howFar++;
-            Rectangle rectangle = new Rectangle(traceX, traceY, width, height);
-            sussy.add(rectangle);
-            if(rectangle.intersects(gameObject.getBounds())){
-                isDone = true;
-            }
-
-            if(traceX < 0 || traceY < 0 || traceX > MainGame.WIDTH || traceY > MainGame.HEIGHT){
-                isDone = true;
-                howFar = -1;
-            }
-
-
-        }
-
-        for(Rectangle rectangle : sussy){
-            g.setColor(Color.RED);
-            g.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
-        }
-
-
-        return howFar;
-    }
 
     @Override
     public Rectangle getBounds() {
@@ -169,56 +81,6 @@ public class Player extends GameObject {
         return health;
     }
 
-
-    private void checkCollisonWallButGraphics(boolean isX,Graphics g){
-
-        if((velX != 0 && isX) || (velY != 0 && !isX)) {
-            for (GameObject gameObject : gameHandler.getGameObjects()) {
-
-                if (gameObject.getId() == ID.WALL) {
-                    Face face =
-                            (isX ? (this.velX > 0 ? Face.EAST : Face.WEST) : (this.velY > 0 ? Face.SOUTH : Face.NORTH));
-
-                    int startX=0;
-                    int startY=0;
-                    int rayWidth = 1;
-                    int rayHeight = 1;
-
-                    switch (face){
-                        case NORTH ->{
-                            startX = this.x;
-                            startY = this.y;
-                            rayWidth = this.width;
-                        }
-
-                        case EAST -> {
-                            startX = this.x + this.width;
-                            startY = this.y;
-                            rayHeight = this.height;
-                        }
-
-                        case SOUTH -> {
-                            startX = this.x;
-                            startY = this.y+this.height;
-                            rayWidth = this.width;
-                        }
-
-                        case WEST -> {
-                            startX = this.x;
-                            startY = this.y;
-                            rayHeight = this.height;
-                        }
-
-
-                    }
-
-                     getDistanceFromObjectButGraphics(face, startX, startY, rayWidth, rayHeight, gameObject, g);
-
-                }
-            }
-        }
-
-    }
 
     private boolean checkCollisonWall(boolean isX){
 
@@ -262,7 +124,7 @@ public class Player extends GameObject {
                         }
 
                     int x = getDistanceFromObject(face, startX, startY, rayWidth, rayHeight, gameObject);
-                    if (x == 1) {
+                    if (x <= 1 && x != -1) {
                         if (velX != 0 && isX){
                             Rectangle intersection = getBounds().intersection(gameObject.getBounds());
                             if(face == Face.EAST) this.x -= intersection.getWidth();

@@ -1,6 +1,7 @@
 package me.trolca.main.objects.enemies;
 
 import me.trolca.main.abstarcts.GameObject;
+import me.trolca.main.enums.Face;
 import me.trolca.main.handlers.GameHandler;
 import me.trolca.main.enums.ID;
 import me.trolca.main.MainGame;
@@ -12,17 +13,12 @@ import java.awt.*;
 
 public class BasicEnemy extends Enemy {
 
-    private GameHandler gameHandler;
-    private final int width;
-    private final int height;
     private int addX;
     private int addY;
+    private int waitTick = 0;
 
     public BasicEnemy(int x, int y, ID id, GameHandler gameHandler) {
-        super(x, y, id);
-        this.gameHandler = gameHandler;
-        this.width = MainGame.WIDTH;
-        this.height = MainGame.HEIGHT;
+        super(x, y, id, gameHandler);
         addX = 0;
         addY = 0;
         velX = 5;
@@ -30,12 +26,10 @@ public class BasicEnemy extends Enemy {
     }
 
     public BasicEnemy(int x, int y,int width, int height,int addX, int addY, ID id, GameHandler gameHandler) {
-        super(x+addX, y+addY, id);
+        super(x+addX, y+addY, id, gameHandler);
         this.addX = addX;
         this.addY = addY;
         this.gameHandler = gameHandler;
-        this.width = width;
-        this.height = height;
         this.x += addX;
         this.y += addY;
         velX = 5;
@@ -50,9 +44,10 @@ public class BasicEnemy extends Enemy {
 
         if(x < addX) velX *= -1;
         if(y < addY) velY *= -1;
-        if(x > width+addX-39) velX *= -1;
-        if(y > height+addY-60) velY *= -1;
+        if(x > MainGame.WIDTH+addX-39) velX *= -1;
+        if(y > MainGame.HEIGHT+addY-60) velY *= -1;
 
+        checkWallColisions();
 
         gameHandler.getParticleHandler().addParticle(new Trail(x, y, 20, 20, 20, ID.TRAIL, Color.RED, gameHandler));
 

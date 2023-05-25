@@ -11,11 +11,9 @@ import java.awt.*;
 
 public class SpeedEnemy extends Enemy {
 
-    private GameHandler gameHandler;
 
     public SpeedEnemy(int x, int y, ID id, GameHandler gameHandler) {
-        super(x, y, id);
-        this.gameHandler = gameHandler;
+        super(x, y, id, gameHandler);
         velX = 5;
         velY = 8;
     }
@@ -34,6 +32,8 @@ public class SpeedEnemy extends Enemy {
         if(y < 0) velY *= -1;
         if(x > MainGame.WIDTH-35) velX *= -1;
         if(y > MainGame.HEIGHT-59) velY *= -1;
+
+        checkWallColisions();
 
         gameHandler.getParticleHandler().addParticle(new Trail(x, y, 25, 15, 15, ID.TRAIL, Color.CYAN, gameHandler));
 
