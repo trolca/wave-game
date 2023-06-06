@@ -54,7 +54,7 @@ public class Level3 extends Level {
     @Override
     public void startLogic() {
         gameHandler.clearEnemys();
-        gameHandler.addGameObject(new FollowEnemy(100, 100, ID.BASIC_ENEMY, gameHandler));
+        gameHandler.addGameObject(new FollowEnemy(100, 100, 2 , ID.BASIC_ENEMY, gameHandler));
     }
 
     @Override

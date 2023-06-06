@@ -15,10 +15,10 @@ public class FollowEnemy extends Enemy {
     private float yFloat=0;
     private final float speed;
 
-    public FollowEnemy(int x, int y, ID id, GameHandler gameHandler) {
+    public FollowEnemy(int x, int y, float speed, ID id, GameHandler gameHandler) {
         super(x, y, id, gameHandler);
         this.gameHandler = gameHandler;
-        speed = (float) 5;
+        this.speed = speed;
     }
 
     @Override

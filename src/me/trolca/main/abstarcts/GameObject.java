@@ -73,6 +73,8 @@ public abstract class GameObject {
         y = location.getY();
     }
 
+
+
     public int getDistanceFromObject(Face face, int startX, int startY, int width, int height, GameObject gameObject){
         int addDir;
 

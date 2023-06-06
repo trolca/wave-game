@@ -26,7 +26,7 @@ public class Player extends GameObject {
 
     @Override
     public void tick() {
-        boolean hasCollided = false;
+        boolean hasCollided;
         hasCollided = checkCollisonWall(true);
         if(!hasCollided) checkCollisonWall(false);
 
@@ -40,8 +40,6 @@ public class Player extends GameObject {
 
     @Override
     public void render(Graphics g) {
-
-
         g.setColor(Color.WHITE);
         g.fillRect(x, y, this.width, this.height);
 
@@ -124,7 +122,7 @@ public class Player extends GameObject {
                         }
 
                     int x = getDistanceFromObject(face, startX, startY, rayWidth, rayHeight, gameObject);
-                    if (x <= 1 && x != -1) {
+                    if (x == 1 || x == 0) {
                         if (velX != 0 && isX){
                             Rectangle intersection = getBounds().intersection(gameObject.getBounds());
                             if(face == Face.EAST) this.x -= intersection.getWidth();

@@ -32,7 +32,6 @@ public class LevelHandler {
         levels.add(new Level4(gameHandler, hud));
 
         currLevel = levels.get(0);
-        levels.get(2).setLocked(false);
 
 
     }

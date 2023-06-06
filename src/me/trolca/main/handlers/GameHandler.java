@@ -40,7 +40,7 @@ public class GameHandler {
     }
 
     public void clearEnemys(){
-        gameObjects.removeIf(gameObject -> gameObject instanceof Enemy);
+        gameObjects.removeIf(gameObject -> gameObject instanceof Enemy || gameObject instanceof Wall);
     }
 
     public ParticleHandler getParticleHandler() {

@@ -5,6 +5,8 @@ import me.trolca.main.enums.ID;
 import me.trolca.main.handlers.GameHandler;
 import me.trolca.main.objects.Wall;
 
+import java.awt.*;
+
 public abstract class Enemy extends GameObject{
 
     protected int waitTick;
@@ -20,14 +22,11 @@ public abstract class Enemy extends GameObject{
             for (Wall wall : gameHandler.getWalls()) {
 
                 if (this.getBounds().intersects(wall.getBounds())) {
-                    int distance = getDistanceFromObject(Face.NORTH, this.x, this.y, 20, 20, wall);
-                    if(distance > 1 || distance == -1) distance = getDistanceFromObject(Face.SOUTH, this.x, this.y+20, 20, 20, wall);
-                    System.out.println(distance);
-                    if (distance <= 1 && distance != -1) {
-                        System.out.println("epiccicici");
+                    Rectangle intersection = getBounds().intersection(wall.getBounds());
+
+                    if (intersection.height < intersection.width) {
                         velY *= -1;
                     } else {
-                        System.out.println("sus");
                         velX *= -1;
                     }
 
@@ -37,6 +36,7 @@ public abstract class Enemy extends GameObject{
             }
         }else waitTick--;
     }
+
 
     public abstract int getDamage();
 }
